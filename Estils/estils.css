@@ -1,0 +1,145 @@
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Títulos */
+h3 {
+    margin-bottom: 20px;
+    color: #444;
+    text-align: left;
+}
+
+/* Formulari */
+form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], input[type="submit"], input[type="reset"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #888;
+    outline: none;
+}
+
+/* Botons */
+input[type="submit"], input[type="reset"], button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    text-align: center;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+    background-color: #555;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Taula */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+}
+
+table tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Enllaços */
+a {
+    text-decoration: none;
+}
+
+a button {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Estils per a la paginació */
+.paginacio {
+    display: flex;
+    justify-content: center; /* centra els botons */
+    margin-top: 20px;
+}
+
+.paginacio a, .paginacio strong {
+    display: inline-block; /* fa que els botons siguin en línia */
+    padding: 10px 15px; /* espai intern per als botons */
+    margin: 0 5px; /* marges entre els botons */
+    background-color: #fff; /* fons blanc per als botons */
+    color: #333; /* color del text */
+    border: 1px solid #ccc; /* bord blanc */
+    border-radius: 5px; /* vores arrodonides */
+    text-decoration: none; /* sense subratllat */
+    transition: background-color 0.3s, box-shadow 0.3s; /* transicions suaus */
+}
+
+.paginacio a:hover {
+    background-color: #e0e0e0; /* fons gris clar en passar el ratolí */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ombra en passar el ratolí */
+}
+
+.paginacio strong {
+    background-color: #333; /* fons gris fosc per a la pàgina actual */
+    color: #fff; /* text blanc */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ombra per a la pàgina actual */
+}
