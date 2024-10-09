@@ -14,7 +14,7 @@
     <!-- formulario per omplir l'id i modificar el titol i el cos -->
     <h3>Modificar article de la BD</h3>
 
-    <form action="../Controlador/crud.php" method="post">
+    <form action="../Model/model.php" method="post">
         <table>
         <label for="id">ID:  </label>    
         <input type="text" id="id" name="id" placeholder="Introdueix ID del article"> <br/>

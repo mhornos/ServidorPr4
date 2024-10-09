@@ -21,7 +21,7 @@
         </a><br>
         <a href="Vistes/Esborrar.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
             <button>Esborrar article</button>
-        </a><br><br>-->
+        </a><br><br> -->
 
     </body>
 </html>

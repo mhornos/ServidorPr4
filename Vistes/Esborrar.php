@@ -13,7 +13,7 @@
     <!-- formulari per escollir l'id per borrar article de la bd -->
     <h3>Eliminar article de la BD</h3>
 
-    <form action="../Controlador/crud.php" method="post">
+    <form action="../Model/model.php" method="post">
         <table>
         <label for="id">ID:  </label>    
         <input type="text" id="id" name="id" placeholder="Introdueix ID del article a eliminar"> <br/>
