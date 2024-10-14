@@ -14,7 +14,7 @@
     <!-- formulari que demana el titol y el cos per generar un article a la bd -->
     <h3>Inserir article a la BD</h3>
 
-    <form action="../Model/model.php" method="post">
+    <form action="../Model/crud.php" method="post">
         <table>
             <label for="titol">Titol:  </label>    
             <input type="text" id="titol" name="titol" placeholder="Introdueix un titol"> <br/>
@@ -36,5 +36,5 @@
 
 <!-- mostra la llista d'articles a sota de tot -->
 <?php
-include "../Controlador/mostrarLlista.php";
+include "../Model/mostrarLlista.php";
 ?>

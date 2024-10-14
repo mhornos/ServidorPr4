@@ -41,7 +41,7 @@ label {
     display: block;
 }
 
-input[type="text"], [type="password"],  input[type="submit"], input[type="reset"] {
+input[type="text"], [type="password"], [type="email"],  input[type="submit"], input[type="reset"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -50,12 +50,12 @@ input[type="text"], [type="password"],  input[type="submit"], input[type="reset"
     font-size: 14px;
 }
 
-input[type="text"], [type="password"] {
+input[type="text"], [type="password"], [type="email"] {
     background-color: #f9f9f9;
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus, [type="password"]:focus {
+input[type="text"]:focus, [type="password"]:focus , [type="email"]:focus {
     border-color: #888;
     outline: none;
 }

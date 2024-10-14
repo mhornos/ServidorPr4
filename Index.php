@@ -28,5 +28,5 @@
 <!-- mostra la llista d'articles a sota de tot -->
 <?php
 include "Vistes/Login.php";
-include "Controlador/mostrarLlista.php";
+include "Model/mostrarLlista.php";
 ?>

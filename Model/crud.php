@@ -4,7 +4,7 @@ $enviar = $_POST["Enviar"] ?? null;
 
 try{
     // ens connectem amb la base de dades
-    $connexio = new PDO('mysql:host=localhost;dbname=pt02_miguel_hornos', 'root', '');  
+    $connexio = new PDO('mysql:host=localhost;dbname=pt04_miguel_hornos', 'root', '');  
     
     // iniciem el switch per detectar l'acció a realitzar segons el valor de '$enviar'
     switch ($enviar) {

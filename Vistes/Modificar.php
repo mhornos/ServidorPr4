@@ -14,7 +14,7 @@
     <!-- formulario per omplir l'id i modificar el titol i el cos -->
     <h3>Modificar article de la BD</h3>
 
-    <form action="../Model/model.php" method="post">
+    <form action="../Model/crud.php" method="post">
         <table>
         <label for="id">ID:  </label>    
         <input type="text" id="id" name="id" placeholder="Introdueix ID del article"> <br/>
@@ -38,5 +38,5 @@
 
 <!-- mostra la llista d'articles a sota de tot -->
 <?php
-include "../Controlador/mostrarLlista.php";
+include "../Model/mostrarLlista.php";
 ?>

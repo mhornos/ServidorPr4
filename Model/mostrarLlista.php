@@ -1,7 +1,7 @@
 <?php
 // connectar a la base de dades amb PDO
 try {
-    $connexio = new PDO('mysql:host=localhost;dbname=pt02_miguel_hornos', 'root', '');
+    $connexio = new PDO('mysql:host=localhost;dbname=pt04_miguel_hornos', 'root', '');
     $connexio->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // definim el nombre de resultats per pàgina
@@ -62,13 +62,14 @@ try {
     // mostrar la taula si hi ha articles
     if (count($articles) > 0) {
         echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>Títol</th><th>Cos</th></tr>";
+        echo "<tr><th>ID</th><th>Títol</th><th>Cos</th><th>Correu</th></tr>";
         
         foreach ($articles as $article) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($article['ID']) . "</td>";
             echo "<td>" . htmlspecialchars($article['titol']) . "</td>";
             echo "<td>" . htmlspecialchars($article['cos']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['correoUsuario']) . "</td>";
             echo "</tr>";
         }
         
