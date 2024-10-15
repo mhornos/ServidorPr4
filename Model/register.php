@@ -5,6 +5,8 @@
 //funcio per registrar usuaris
 function crearUsuari($usuari,$contrasenya,$correu){
     try{
+        $errors = [];
+
         //ens connectem amb la base de dades
         $connexio = new PDO('mysql:host=localhost;dbname=pt04_miguel_hornos', 'root', '');  
         
@@ -15,7 +17,7 @@ function crearUsuari($usuari,$contrasenya,$correu){
         $consultaExistenciaUsuari->execute();
         if ($consultaExistenciaUsuari->rowCount() > 0) {
             $existeixUsuari = true;
-            echo "el nom d'usuari ja existeix ❌";
+            $errors[] = "el nom d'usuari ja existeix ❌";
         }
 
         //comprobar si el correu ja existeix
@@ -24,8 +26,12 @@ function crearUsuari($usuari,$contrasenya,$correu){
         $consultaExistenciaCorreu->execute();
         if ($consultaExistenciaCorreu->rowCount() > 0) {
             $existeixUsuari = true;
-            echo "ja hi ha un usuari vinculat a aquest correu ❌";
+            $errors[] = "ja hi ha un usuari vinculat a aquest correu ❌";
             
+        }
+
+        foreach ($errors as $error) {
+            echo "<p>$error</p>";
         }
 
         // si no existeix, creem el nou usuari
@@ -33,7 +39,7 @@ function crearUsuari($usuari,$contrasenya,$correu){
             $insert = $connexio->prepare("INSERT INTO usuaris (nombreUsuario, contrasenya, correo) VALUES (:usuari, :contrasenya, :correu)");
             
             $insert->bindParam(':usuari', $usuari);
-            $insert->bindParam(':contrasenya', $contrasenya);  // Aquí se almacena la contraseña en texto plano
+            $insert->bindParam(':contrasenya', $contrasenya);
             $insert->bindParam(':correu', $correu);
 
             $insert->execute();

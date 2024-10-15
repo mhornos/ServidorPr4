@@ -1,6 +1,7 @@
 <!-- Miguel Angel Hornos -->
 
 <?php
+require "../Model/register.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,25 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($contrasenya)){
         $errors[] = "falta la contrasenya ❌";
-    }
-
-    if (empty($contrasenya2)){
+    } elseif(empty($contrasenya2)){
         $errors[] = "has de repetir la contrasenya ❌";
     } elseif ($contrasenya !== $contrasenya2){
         $errors[] = "les contrasenyes no coincideixen ❌";
     }
 
     if(empty($errors)){
-        require "../Model/register.php";
         crearUsuari($usuari,$contrasenya,$correu);
     }
 
     foreach ($errors as $error) {
         echo "<p>$error</p>";
     }
-
-
-
+    
 }
 ?>
 
