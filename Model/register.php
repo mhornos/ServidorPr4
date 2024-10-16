@@ -52,4 +52,17 @@ function crearUsuari($usuari,$contrasenya,$correu){
         
     }
 }
+
+//funcio per comprobar validesa password
+function validarContrasenya($contrasenya){
+    //comprobar longitud minima (8)
+
+    //comprobar si te al menys 1 nombre
+
+    //comprobar si te al menys 1 majuscula
+
+    //comprobar si te al menys 1 minuscula
+
+
+}
 ?>
