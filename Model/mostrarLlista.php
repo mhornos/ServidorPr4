@@ -62,14 +62,13 @@ try {
     // mostrar la taula si hi ha articles
     if (count($articles) > 0) {
         echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>Títol</th><th>Cos</th><th>Correu</th></tr>";
+        echo "<tr><th>ID</th><th>Títol</th><th>Cos</th></tr>";
         
         foreach ($articles as $article) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($article['ID']) . "</td>";
             echo "<td>" . htmlspecialchars($article['titol']) . "</td>";
             echo "<td>" . htmlspecialchars($article['cos']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['correoUsuario']) . "</td>";
             echo "</tr>";
         }
         

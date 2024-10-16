@@ -20,7 +20,10 @@
     <input type="password" id="contrasenya" name="contrasenya" placeholder="Contrasenya"> </br>
     <input type="password" id="contrasenya2" name="contrasenya2" placeholder="Repeteix la contrasenya"> </br>
     <input type="submit" name="Register" value="Register">
-    Ja tinc un compte: <a href="../"> Iniciar sessió </a>
+    Ja tinc un compte: <a href="Login.php"> Iniciar sessió </a>
     </form>
+    <a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
+            <button>Tornar a inici</button>
+        </a>
 </body>
 </html>

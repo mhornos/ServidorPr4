@@ -1,10 +1,19 @@
 <!-- Miguel Angel Hornos -->
 
 <?php
+session_start();
+
 require "../Model/login.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//comprobar si ja hi ha una sessió activa
+if (isset($_SESSION["usuari"])){
+    echo "ja has inicitat sessió com: \"" . $_SESSION["usuari"] . "\" ✅";
+    header("Location: ../Index.php");
+    exit;
+}
 
+// si no, procesem el formulari de login
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuari = $_POST["usuari"] ?? null;
     $contrasenya = $_POST["contrasenya"] ?? null;
 
@@ -17,8 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "falta la contrasenya ❌";
     }
 
+    //si no hi ha errors intentem iniciar sessió
     if(empty($errors)){
-        iniciarSesio($usuari,$contrasenya);
+        if (iniciarSesio($usuari,$contrasenya)){
+            $_SESSION["usuari"] = $usuari;
+            header("Location: ../Index.php");
+            exit;
+        } else {
+            $errors[] = "nom d'usuari o contrasenya incorrectes ❌";
+        }
     }
 
     foreach ($errors as $error) {
@@ -32,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pr2</title>
+    <title>Pr4</title>
 
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
