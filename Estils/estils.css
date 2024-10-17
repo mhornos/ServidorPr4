@@ -5,9 +5,21 @@
     box-sizing: border-box;
 }
 
+h1 {
+    font-family: 'Quicksand', sans-serif; /* Cambia a la fuente Quicksand */
+    color: rgb(2, 2, 2); /* Estilo de color amarillo */
+    text-align: center; /* Alineación centrada */
+    font-size: 48px; /* Ajusta el tamaño de la fuente según sea necesario */
+    margin: 20px 0; /* Margen superior e inferior */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto para mayor legibilidad */
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background: url('../imgs/fons.jpg') no-repeat center center fixed; /* Asegúrate de reemplazar con la URL de tu imagen */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
     color: #333;
     padding: 20px;
     display: flex;
@@ -111,17 +123,23 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 table th, table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #adadad;
+    border-bottom: 1px solid #434343;
+
+    
 }
 
 table th {
     background-color: #333;
     color: #fff;
+    
 }
 
 table tr:hover {
