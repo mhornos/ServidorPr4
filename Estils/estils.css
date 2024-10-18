@@ -5,17 +5,6 @@
     box-sizing: border-box;
 }
 
-h1 {
-    font-family: 'Quicksand', sans-serif; /* Cambia a la fuente Quicksand */
-    color: rgb(2, 2, 2); /* Estilo de color amarillo */
-    text-align: center; /* Alineación centrada */
-    font-size: 48px; /* Ajusta el tamaño de la fuente según sea necesario */
-    margin: 20px 0; /* Margen superior e inferior */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto para mayor legibilidad */
-}
-
-
-
 body {
     font-family: Arial, sans-serif;
     background: url('../imgs/fons.jpg') no-repeat center center fixed; /* Asegúrate de reemplazar con la URL de tu imagen */
@@ -50,7 +39,7 @@ body {
 }
 
 .navbar button:hover {
-    background-color: #555;
+    background-color: #7a7a7a;
 }
 
 /* Títulos */
@@ -109,7 +98,7 @@ input[type="submit"], input[type="reset"], button {
 }
 
 input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
-    background-color: #555;
+    background-color: #636363;
 }
 
 button {
@@ -177,7 +166,7 @@ a button {
 }
 
 .paginacio a:hover {
-    background-color: #e0e0e0; /* fons gris clar en passar el ratolí */
+    background-color: #d3d3d3; /* fons gris clar en passar el ratolí */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* ombra en passar el ratolí */
 }
 

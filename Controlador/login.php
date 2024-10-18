@@ -5,13 +5,6 @@ session_start();
 
 require "../Model/login.php";
 
-//comprobar si ja hi ha una sessió activa
-if (isset($_SESSION["usuari"])){
-    echo "ja has inicitat sessió com: \"" . $_SESSION["usuari"] . "\" ✅";
-    header("Location: ../Index.php");
-    exit;
-}
-
 // si no, procesem el formulari de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuari = $_POST["usuari"] ?? null;
@@ -29,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //si no hi ha errors intentem iniciar sessió
     if(empty($errors)){
         if (iniciarSesio($usuari,$contrasenya)){
-            $_SESSION["usuari"] = $usuari;
+            $_SESSION["usuari"] = $usuari;  
             header("Location: ../Index.php");
             exit;
         } else {

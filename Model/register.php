@@ -3,7 +3,7 @@
 <?php
 
 //funcio per registrar usuaris
-function crearUsuari($usuari,$contrasenya,$correu){
+function crearUsuari($usuari,$contrasenya,$correu,$ciutat){
     try{
         $errors = [];
 
@@ -36,10 +36,11 @@ function crearUsuari($usuari,$contrasenya,$correu){
 
         // si no existeix, creem el nou usuari
         if (!$existeixUsuari){
-            $insert = $connexio->prepare("INSERT INTO usuaris (nombreUsuario, contrasenya, correo) VALUES (:usuari, :contrasenya, :correu)");
+            $insert = $connexio->prepare("INSERT INTO usuaris (nombreUsuario, contrasenya, correo, ciutat) VALUES (:usuari, :contrasenya, :correu, :ciutat)");
             
             $insert->bindParam(':usuari', $usuari);
             $insert->bindParam(':contrasenya', $contrasenya);
+            $insert->bindParam(':ciutat', $ciutat);
             $insert->bindParam(':correu', $correu);
 
             $insert->execute();
@@ -53,16 +54,4 @@ function crearUsuari($usuari,$contrasenya,$correu){
     }
 }
 
-//funcio per comprobar validesa password
-function validarContrasenya($contrasenya){
-    //comprobar longitud minima (8)
-
-    //comprobar si te al menys 1 nombre
-
-    //comprobar si te al menys 1 majuscula
-
-    //comprobar si te al menys 1 minuscula
-
-
-}
 ?>

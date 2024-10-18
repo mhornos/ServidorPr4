@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $usuari = $_POST["usuari"] ?? null;
     $correu = $_POST["correu"] ?? null;
+    $ciutat = $_POST["ciutat"] ?? null;
     $contrasenya = $_POST["contrasenya"] ?? null;
     $contrasenya2 = $_POST["contrasenya2"] ?? null;
 
@@ -22,6 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "el correu no es valid❌";
     }
 
+    if (empty($ciutat)){
+        $errors[] = "falta la ciutat ❌";
+    }
+
     if (empty($contrasenya)){
         $errors[] = "falta la contrasenya ❌";
     } elseif(empty($contrasenya2)){
@@ -30,8 +35,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "les contrasenyes no coincideixen ❌";
     }
 
+    //comprobar validesa password:
+
+    //comprobar longitud minima (8)
+    //comprobar si te al menys 1 nombre
+
+    //comprobar si te al menys 1 majuscula
+
+    //comprobar si te al menys 1 minuscula
+
     if(empty($errors)){
-        crearUsuari($usuari,$contrasenya,$correu);
+        crearUsuari($usuari,$contrasenya,$correu,$ciutat);
     }
 
     foreach ($errors as $error) {

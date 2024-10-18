@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // assignem la variable '$enviar' amb el valor que es troba al formulari al camp "Enviar"
 $enviar = $_POST["Enviar"] ?? null;
 
@@ -13,21 +15,26 @@ try{
             $titol = $_POST["titol"] ?? null;
             $cos = $_POST["cos"] ?? null;
         
+            // obtenim el usuari mediant la sessió
+            $usuari = $_SESSION["usuari"] ?? null;
+        
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                
                 // preparem la consulta per inserir l'article a la base de dades
-                $consultaInsert = $connexio->prepare("INSERT INTO article (titol, cos) VALUES (:titol, :cos)");
+                $consultaInsert = $connexio->prepare("INSERT INTO article (titol, cos, nom_usuari) VALUES (:titol, :cos, :nom_usuari)");
                 $consultaInsert->bindParam(':titol', $titol);
                 $consultaInsert->bindParam(':cos', $cos);
-                
+                $consultaInsert->bindParam(':nom_usuari', $usuari); 
+        
                 // si algun dels camps és buit mostrem un missatge d'error
                 if (empty($titol) || empty($cos)) {
-                    echo "Els camps titol i cos són obligatoris ❌";
+                    echo "Els camps titol i cos son obligatoris ❌";
                 // si tot està correcte executem la consulta i mostrem un missatge d'exit
                 } else if ($consultaInsert->execute()) {
                     $ultimId = $connexio->lastInsertId();
                     echo "Article amb ID " . $ultimId . " inserit correctament ✅";
-                } else echo "Error al inserir article ❌";        
+                } else {
+                    echo "Error al inserir article ❌";        
+                }
             }
             break;
         
@@ -179,5 +186,6 @@ try{
 
 <!-- mostra la llista d'articles a sota de tot -->
 <?php
-include "../Controlador/mostrarLlista.php";
+include "mostrarLlista.php";
+
 ?>

@@ -25,7 +25,12 @@ try {
     $totalPags = ceil($totalArticles / $resultatsPerPagina);
     
     // consulta per obtenir els articles per a la pàgina actual
-    $consulta = $connexio->prepare("SELECT * FROM article LIMIT :offset, :limit");
+    $consulta = $connexio->prepare("
+        SELECT a.*, u.ciutat 
+        FROM article a 
+        LEFT JOIN usuaris u ON a.nom_usuari = u.nombreUsuario 
+        LIMIT :offset, :limit
+    ");
     $consulta->bindValue(':offset', $offset, PDO::PARAM_INT);
     $consulta->bindValue(':limit', $resultatsPerPagina, PDO::PARAM_INT);
     $consulta->execute();
@@ -62,13 +67,17 @@ try {
     // mostrar la taula si hi ha articles
     if (count($articles) > 0) {
         echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>Títol</th><th>Cos</th></tr>";
+        echo "<tr><th>ID</th><th>Marca</th><th>Model</th><th>Color</th><th>Matricula</th><th>Mecànic</th><th>Ciutat</th></tr>";
         
         foreach ($articles as $article) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($article['ID']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['titol']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['cos']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['marca']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['model']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['color']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['matricula']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['nom_usuari']) . "</td>";
+            echo "<td>" . htmlspecialchars($article['ciutat']) . "</td>";
             echo "</tr>";
         }
         

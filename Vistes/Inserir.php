@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
 <body>
-    <!-- formulari que demana el titol y el cos per generar un article a la bd -->
+    <!-- formulari que demana les dades del vehicle per generar un article a la bd -->
     <h3>Inserir article a la BD</h3>
 
     <form action="../Model/crud.php" method="post">

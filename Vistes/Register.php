@@ -13,10 +13,11 @@
 
 </head>
 <body>
-    <h3>Crear compte:</h3>
+    <h3>Crear compte de mecànic:</h3>
     <form action="../Controlador/register.php" method="post">
     <input type="text" id="usuari" name="usuari" placeholder="Usuari"> </br> 
     <input type="email" id="correu" name="correu" placeholder="Correu"> </br> 
+    <input type="text" id="ciutat" name="ciutat" placeholder="Ciutat"> </br> 
     <input type="password" id="contrasenya" name="contrasenya" placeholder="Contrasenya"> </br>
     <input type="password" id="contrasenya2" name="contrasenya2" placeholder="Repeteix la contrasenya"> </br>
     <input type="submit" name="Register" value="Register">
