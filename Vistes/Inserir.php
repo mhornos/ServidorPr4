@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pr2</title>
+    <title>Pr4</title>
 
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
@@ -16,12 +16,18 @@
 
     <form action="../Model/crud.php" method="post">
         <table>
-            <label for="titol">Titol:  </label>    
-            <input type="text" id="titol" name="titol" placeholder="Introdueix un titol"> <br/>
+            <label for="marca">Marca:  </label>    
+            <input type="text" id="marca" name="marca" placeholder="Introdueix la marca del vehicle">
 
-            <label for="cos">Cos: </label>    
-            <input type="text" id="cos" name="cos" placeholder="Introdueix un cos"> <br/><br/>
+            <label for="model">Model: </label>    
+            <input type="text" id="model" name="model" placeholder="Introdueix el model del vehicle">
             
+            <label for="color">Color: </label>    
+            <input type="text" id="color" name="color" placeholder="Introdueix el color del vehicle">
+
+            <label for="matricula">Matricula: </label>    
+            <input type="text" id="matricula" name="matricula" placeholder="Introdueix la matricula del vehicle">
+
             <input type="submit" value="Inserir" name="Enviar">
             <input type="reset" value="Buidar">
         </table>     

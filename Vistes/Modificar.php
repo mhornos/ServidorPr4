@@ -17,14 +17,20 @@
     <form action="../Model/crud.php" method="post">
         <table>
         <label for="id">ID:  </label>    
-        <input type="text" id="id" name="id" placeholder="Introdueix ID del article"> <br/>
+        <input type="text" id="id" name="id" placeholder="Introdueix ID del vehicle a editar">
         
-            <label for="titol">Editar titol:  </label>    
-            <input type="text" id="titol" name="titol" placeholder="Edita el titol"> <br/>
+            <label for="marca">Editar marca:  </label>    
+            <input type="text" id="marca" name="marca" placeholder="Edita la marca">
 
-            <label for="cos">Editar cos: </label>    
-            <input type="text" id="cos" name="cos" placeholder="Edita el cos"> <br/><br/>
-            
+            <label for="model">Editar model: </label>    
+            <input type="text" id="model" name="model" placeholder="Edita el model">
+
+            <label for="color">Editar color: </label>    
+            <input type="text" id="color" name="color" placeholder="Edita el color">
+
+            <label for="matricula">Editar matricula:  </label>    
+            <input type="text" id="matricula" name="matricula" placeholder="Edita la matricula">
+
             <input type="submit" value="Modificar" name="Enviar">
             <input type="reset" value="Buidar">
         </table>     
