@@ -1,4 +1,12 @@
 <!-- Miguel Ángel Hornos -->
+ 
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require "Controlador/gestioSessio.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +22,7 @@
 </html>
 
 <?php
+include "Controlador/cookies.php";
 include "Vistes/navbar.php";
 include "Model/mostrarLlista.php";
 ?>

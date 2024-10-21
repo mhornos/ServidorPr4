@@ -12,21 +12,24 @@
 </head>
 <body>
     <!-- formulari que demana les dades del vehicle per generar un article a la bd -->
-    <h3>Inserir article a la BD</h3>
+    <h3>Inserir vehicle a la BD</h3>
 
     <form action="../Model/crud.php" method="post">
         <table>
             <label for="marca">Marca:  </label>    
-            <input type="text" id="marca" name="marca" placeholder="Introdueix la marca del vehicle">
+            <input type="text" id="marca" name="marca" placeholder="Introdueix la marca del vehicle*">
 
             <label for="model">Model: </label>    
-            <input type="text" id="model" name="model" placeholder="Introdueix el model del vehicle">
+            <input type="text" id="model" name="model" placeholder="Introdueix el model del vehicle*">
             
             <label for="color">Color: </label>    
-            <input type="text" id="color" name="color" placeholder="Introdueix el color del vehicle">
+            <input type="text" id="color" name="color" placeholder="Introdueix el color del vehicle*">
 
             <label for="matricula">Matricula: </label>    
-            <input type="text" id="matricula" name="matricula" placeholder="Introdueix la matricula del vehicle">
+            <input type="text" id="matricula" name="matricula" placeholder="Introdueix la matricula del vehicle*">
+
+            <label for="imatge">Imatge del vehicle: </label>
+            <input type="text" id="imatge" name="imatge" placeholder="Introdueix l'enllaç de la imatge (opcional)">
 
             <input type="submit" value="Inserir" name="Enviar">
             <input type="reset" value="Buidar">

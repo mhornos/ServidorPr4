@@ -1,11 +1,15 @@
 <!-- Miguel Angel Hornos -->
 
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require "../Model/login.php";
+require "cookies.php";
 
-// si no, procesem el formulari de login
+
+// procesem el formulari de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuari = $_POST["usuari"] ?? null;
     $contrasenya = $_POST["contrasenya"] ?? null;
@@ -19,10 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "falta la contrasenya ❌";
     }
 
-    //si no hi ha errors intentem iniciar sessió
+    // si no hi ha errors intentem iniciar sessió
     if(empty($errors)){
-        if (iniciarSesio($usuari,$contrasenya)){
+        if (iniciarSesio($usuari, $contrasenya)){
             $_SESSION["usuari"] = $usuari;  
+            establirCookie("usuari", $usuari); 
             header("Location: ../Index.php");
             exit;
         } else {
@@ -46,8 +51,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
 <body>
-<br><a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
-            <button>Tornar a inici</button>
-        </a><br>
+    <br><form method="POST">
+        <label for="usuari">Nom d'usuari:</label>
+        <input type="text" name="usuari" value="<?php echo htmlspecialchars($usuari ?? ''); ?>">
+
+        <label for="contrasenya">Contrasenya:</label>
+        <input type="password" name="contrasenya" value="">
+
+        <input type="submit" value="Iniciar Sessió">
+    </form>
+
+    <br><a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
+        <button>Tornar a inici</button>
+    </a><br>
 </body>
 </html>

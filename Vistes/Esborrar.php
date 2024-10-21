@@ -11,12 +11,12 @@
 </head>
 <body>
     <!-- formulari per escollir l'id per borrar article de la bd -->
-    <h3>Eliminar article de la BD</h3>
+    <h3>Eliminar vehicle de la BD</h3>
 
     <form action="../Model/crud.php" method="post">
         <table>
         <label for="id">ID:  </label>    
-        <input type="text" id="id" name="id" placeholder="Introdueix ID del article a eliminar"> <br/>
+        <input type="text" id="id" name="id" placeholder="Introdueix ID del teu vehicle a eliminar*"> <br/>
 
         <input type="submit" value="Eliminar" name="Enviar">
         <input type="reset" value="Buidar">

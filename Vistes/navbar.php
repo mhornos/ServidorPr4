@@ -1,5 +1,9 @@
+<!-- Miguel Angel Hornos -->
+
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,13 +24,13 @@ session_start();
         <!-- 3 botons que ens envien al document corresponent per tractar les dades -->
         <h3>Que vols fer?</h3> 
         <a href="Vistes/Inserir.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>"> 
-            <button>Inserir article</button>
+            <button>Inserir vehicle</button>
         </a><br>
         <a href="Vistes/Modificar.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
-            <button>Modificar article</button>
+            <button>Modificar vehicle</button>
         </a><br>
         <a href="Vistes/Esborrar.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
-            <button>Esborrar article</button>
+            <button>Esborrar vehicle</button>
         </a><br><br>
 
     <!-- si l'usuari no està logat -->

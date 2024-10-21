@@ -1,13 +1,14 @@
+<!-- Miguel Angel Hornosa -->
 <?php
-// connectar a la base de dades amb PDO
+// conectar a la base de dades amb PDO
 try {
     $connexio = new PDO('mysql:host=localhost;dbname=pt04_miguel_hornos', 'root', '');
     $connexio->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // definim el nombre de resultats per pàgina
+    // cefinir el nombre de resultats per pàgina
     $resultatsPerPagina = 5;
     
-    // definim la pàgina actual, estableix la pàgina a 1 si el valor a l'url és menor a 1
+    // cefinir la pàgina actual
     $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     if ($paginaActual < 1) {
         $paginaActual = 1;
@@ -55,36 +56,39 @@ try {
         }
     }
     
-    // botó de pagina seguent
+    // botó de pàgina següent
     if ($paginaActual < $totalPags) {
         echo '<a href="?pagina=' . ($paginaActual + 1) . '">Següent</a>';
     }
-    echo "</div>";
+    echo "</div> <br>";
     
-    // div per a la taula d'articles
-    echo "<div class='articles'>";
+    // div per als articles
+    echo "<div class='articles-container'>";
     
-    // mostrar la taula si hi ha articles
+    // mostrar els articles si n'hi ha
     if (count($articles) > 0) {
-        echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>Marca</th><th>Model</th><th>Color</th><th>Matricula</th><th>Mecànic</th><th>Ciutat</th></tr>";
-        
         foreach ($articles as $article) {
-            echo "<tr>";
+            echo "<div class='article-box'>";
             echo "<td>" . htmlspecialchars($article['ID']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['marca']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['model']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['color']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['matricula']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['nom_usuari']) . "</td>";
-            echo "<td>" . htmlspecialchars($article['ciutat']) . "</td>";
-            echo "</tr>";
+            echo "<h3>" . htmlspecialchars($article['marca']) . "</h3>";
+            echo "<p><strong>Model:</strong> " . htmlspecialchars($article['model']) . "</p>";
+            echo "<p><strong>Color:</strong> " . htmlspecialchars($article['color']) . "</p>";
+            echo "<p><strong>Matrícula:</strong> " . htmlspecialchars($article['matricula']) . "</p>";
+            echo "<p><strong>Mecànic:</strong> " . htmlspecialchars($article['nom_usuari']) . "</p>";
+            echo "<p><strong>Ciutat:</strong> " . htmlspecialchars($article['ciutat']) . "</p>";
+            
+            // mostrar la imatge si existeix
+            if (!empty($article['imatge'])) {
+                echo "<img src='" . htmlspecialchars($article['imatge']) . "' alt='Imatge' width='150'>";
+            } else {
+                echo "<p>No hi ha imatge</p>";
+            }
+            echo "</div>";
         }
-        
-        echo "</table>";
     } else {
-        echo "No s'han trobat articles.<br>";
+        echo "<p>No s'han trobat articles.</p>";
     }
+    
     echo "</div>";
     
 } catch (PDOException $e) {

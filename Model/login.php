@@ -19,13 +19,14 @@ function iniciarSesio($usuari,$contrasenya){
             $usuariDades = $existeixUsuari->fetch(PDO::FETCH_ASSOC);
             $contrasenyaBD = $usuariDades["contrasenya"];
 
-            if($contrasenyaBD === $contrasenya){
-                return $usuariDades;
+            // comprovem la contrasenya utilitzant password_verify
+            if (password_verify($contrasenya, $contrasenyaBD)) {
+                return $usuariDades; // retornem les dades de l'usuari si l'inici de sessió és correcte
             } else {
-                return false;
+                return false; // la contrasenya no coincideix
             }
         } else {
-            return false;
+            return false; // l'usuari no existeix
         }
 
     } catch (PDOException $e) {

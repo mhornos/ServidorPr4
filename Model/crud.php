@@ -1,7 +1,9 @@
 <!-- Miguel Angel Hornos -->
 
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // assignem la variable '$enviar' amb el valor que es troba al formulari al camp "Enviar"
 $enviar = $_POST["Enviar"] ?? null;
@@ -18,6 +20,7 @@ try{
             $model = $_POST["model"] ?? null;
             $color = $_POST["color"] ?? null;
             $matricula = $_POST["matricula"] ?? null;
+            $imatge = $_POST["imatge"] ?? null;
         
             // obtenim el usuari mediant la sessió
             $usuari = $_SESSION["usuari"] ?? null;
@@ -31,19 +34,20 @@ try{
         
                 // si algun dels camps és buit mostrem un missatge d'error
                 if (empty($marca) || empty($model) || empty($color) || empty($matricula)) {
-                    echo "tots els camps són obligatoris ❌";
+                    echo "marca, model, color i matricula són obligatoris ❌";
                 // comprovem si la matrícula ja existeix
                 } else if ($matriculaExisteix > 0) {
                     echo "la matrícula '" . htmlspecialchars($matricula) . "' ja existeix ❌";
                 } else {
                     // preparem la consulta per inserir l'article a la base de dades
-                    $consultaInsert = $connexio->prepare("INSERT INTO article (marca, model, color, matricula, nom_usuari) 
-                                                            VALUES (:marca, :model, :color, :matricula, :nom_usuari)");
+                    $consultaInsert = $connexio->prepare("INSERT INTO article (marca, model, color, matricula, nom_usuari, imatge) 
+                                                            VALUES (:marca, :model, :color, :matricula, :nom_usuari, :imatge)");
                     $consultaInsert->bindParam(':marca', $marca);
                     $consultaInsert->bindParam(':model', $model);
                     $consultaInsert->bindParam(':color', $color);
                     $consultaInsert->bindParam(':matricula', $matricula);
                     $consultaInsert->bindParam(':nom_usuari', $usuari);
+                    $consultaInsert->bindParam(':imatge', $imatge);
         
                     // si tot està correcte executem la consulta i mostrem un missatge d'èxit
                     if ($consultaInsert->execute()) {
@@ -64,6 +68,7 @@ try{
                 $model = $_POST["model"] ?? null;
                 $color = $_POST["color"] ?? null;
                 $matricula = $_POST["matricula"] ?? null;
+                $imatge = $_POST["imatge"] ?? null;
             
                 // obtenim el nom de l'usuari de la sessió
                 $usuari = $_SESSION["usuari"] ?? null;
@@ -132,6 +137,14 @@ try{
                     $modificarDades .= "matricula = :matricula";
                     $primeraModificacio = false;
                 }
+                // si s'omple la matricula l'afegim a la consulta
+                if (!empty($imatge)) {
+                    if (!$primeraModificacio) {
+                        $modificarDades .= ", ";
+                    }
+                    $modificarDades .= "imatge = :imatge";
+                    $primeraModificacio = false;
+                }
             
                 // si no hi ha dades per modificar mostrem un missatge d'error
                 if ($primeraModificacio) {
@@ -160,7 +173,9 @@ try{
                 if (!empty($matricula)) {
                     $consultaModif->bindParam(':matricula', $matricula);
                 }
-            
+                if (!empty($imatge)) {
+                    $consultaModif->bindParam(':imatge', $imatge);
+                }
                 // executem la consulta de modificació i mostrem missatge d'èxit o error
                 if ($consultaModif->execute()) {
                     echo "article amb ID " . $id . " modificat correctament ✅";
@@ -173,6 +188,9 @@ try{
         case "Eliminar":
             // vinculem l'id del formulario a una variable
             $id = $_POST["id"] ?? null;
+
+            // obtenim el nom de l'usuari de la sessió
+            $usuari = $_SESSION["usuari"] ?? null;
 
             // si falta l'ID salta un error
             if (empty($id)) {
@@ -187,6 +205,16 @@ try{
 
             if ($consultaExistencia->rowCount() == 0) {
                 echo "no s'ha trobat cap article amb aquest ID ❌";
+                break;
+            }
+
+            // Obtenim l'usuari creador de l'article
+            $article = $consultaExistencia->fetch(PDO::FETCH_ASSOC);
+            $usuariCreador = $article['nom_usuari'];
+
+            // comprovem si l'usuari de la sessió és el mateix que el creador de l'article
+            if ($usuari !== $usuariCreador) {
+                echo "no tens permís per eliminar aquest article ❌";
                 break;
             }
 

@@ -12,12 +12,12 @@
 </head>
 <body>
     <!-- formulario per omplir l'id i modificar el titol i el cos -->
-    <h3>Modificar article de la BD</h3>
+    <h3>Modificar vechicle de la BD</h3>
 
     <form action="../Model/crud.php" method="post">
         <table>
         <label for="id">ID:  </label>    
-        <input type="text" id="id" name="id" placeholder="Introdueix ID del vehicle a editar">
+        <input type="text" id="id" name="id" placeholder="Introdueix ID del vehicle a editar*">
         
             <label for="marca">Editar marca:  </label>    
             <input type="text" id="marca" name="marca" placeholder="Edita la marca">
@@ -30,6 +30,9 @@
 
             <label for="matricula">Editar matricula:  </label>    
             <input type="text" id="matricula" name="matricula" placeholder="Edita la matricula">
+
+            <label for="imatge">Imatge del vehicle: </label>
+            <input type="text" id="imatge" name="imatge" placeholder="Introdueix l'enllaç de la imatge">
 
             <input type="submit" value="Modificar" name="Enviar">
             <input type="reset" value="Buidar">
