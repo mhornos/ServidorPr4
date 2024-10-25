@@ -38,7 +38,10 @@ try{
                 // comprovem si la matrícula ja existeix
                 } else if ($matriculaExisteix > 0) {
                     echo "la matrícula '" . htmlspecialchars($matricula) . "' ja existeix ❌";
-                } else {
+                // comprovem si la matrícula té més de 12 dígits
+                } else if (strlen($matricula) > 12) {
+                    echo "la matrícula no pot tenir més de 12 caràcters ❌";
+                } else {    
                     // preparem la consulta per inserir l'article a la base de dades
                     $consultaInsert = $connexio->prepare("INSERT INTO article (marca, model, color, matricula, nom_usuari, imatge) 
                                                             VALUES (:marca, :model, :color, :matricula, :nom_usuari, :imatge)");
@@ -59,8 +62,7 @@ try{
                 }
             }
             break;
-        
-        
+    
             case "Modificar":
                 // obtenim la informacio del formulari
                 $id = $_POST["id"] ?? null;
@@ -76,6 +78,10 @@ try{
                 // si falta l'id mostrem un missatge d'error
                 if (empty($id)) {
                     echo "falta l'ID ❌";
+                    break;
+                //si la matricula te mes de 12 digits missatge d'error
+                } else if (strlen($matricula) > 12) {
+                    echo "la matrícula no pot tenir més de 12 caràcters ❌";
                     break;
                 }
             

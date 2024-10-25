@@ -1,14 +1,17 @@
 <!-- Miguel Angel Hornosa -->
 <?php
-// conectar a la base de dades amb PDO
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// conectar a la bd amb PDO
 try {
     $connexio = new PDO('mysql:host=localhost;dbname=pt04_miguel_hornos', 'root', '');
     $connexio->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // cefinir el nombre de resultats per pàgina
+    // definir el el nombre de resultats per página
     $resultatsPerPagina = 5;
     
-    // cefinir la pàgina actual
+    // definir la página actual
     $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     if ($paginaActual < 1) {
         $paginaActual = 1;
@@ -17,55 +20,69 @@ try {
     // calcular l'offset
     $offset = ($paginaActual - 1) * $resultatsPerPagina;
     
-    // consulta per comptar el total d'articles
-    $consultaTotal = $connexio->prepare("SELECT COUNT(*) as total FROM article");
+    // verificar si l'usuari está loguejat
+    $usuarioLogueado = isset($_SESSION['usuari']) ? $_SESSION['usuari'] : null;
+
+    if ($usuarioLogueado) {
+        // si l'usuari está loguejat, mostrar nomes els seus articles
+        $consultaTotal = $connexio->prepare("SELECT COUNT(*) as total FROM article WHERE nom_usuari = :nom_usuari");
+        $consultaTotal->bindValue(':nom_usuari', $usuarioLogueado, PDO::PARAM_STR);
+
+        $consulta = $connexio->prepare("
+            SELECT a.*, u.ciutat 
+            FROM article a 
+            LEFT JOIN usuaris u ON a.nom_usuari = u.nombreUsuario 
+            WHERE a.nom_usuari = :nom_usuari
+            LIMIT :offset, :limit
+        ");
+        $consulta->bindValue(':nom_usuari', $usuarioLogueado, PDO::PARAM_STR);
+    } else {
+        // si no está loguejat, mostrar tots els articles
+        $consultaTotal = $connexio->prepare("SELECT COUNT(*) as total FROM article");
+        $consulta = $connexio->prepare("
+            SELECT a.*, u.ciutat 
+            FROM article a 
+            LEFT JOIN usuaris u ON a.nom_usuari = u.nombreUsuario 
+            LIMIT :offset, :limit
+        ");
+    }
+
+    // executar la consulta
     $consultaTotal->execute();
     $totalArticles = $consultaTotal->fetchColumn();
-    
-    // calcular el número total de pàgines
+
+    // calcular el nombre total de pagines
     $totalPags = ceil($totalArticles / $resultatsPerPagina);
-    
-    // consulta per obtenir els articles per a la pàgina actual
-    $consulta = $connexio->prepare("
-        SELECT a.*, u.ciutat 
-        FROM article a 
-        LEFT JOIN usuaris u ON a.nom_usuari = u.nombreUsuario 
-        LIMIT :offset, :limit
-    ");
+
     $consulta->bindValue(':offset', $offset, PDO::PARAM_INT);
     $consulta->bindValue(':limit', $resultatsPerPagina, PDO::PARAM_INT);
     $consulta->execute();
     
     // obtenir articles
     $articles = $consulta->fetchAll(PDO::FETCH_ASSOC);
-    
-    // div per a la paginació
+
     echo "<div class='paginacio'>";
-    
-    // botó de página anterior
     if ($paginaActual > 1) {
         echo '<a href="?pagina=' . ($paginaActual - 1) . '">Anterior</a>';
     }
     
-    // enllaços a totes les pàgines
+    // enllaç a totes les pagines
     for ($i = 1; $i <= $totalPags; $i++) {
         if ($i == $paginaActual) {
-            echo '<strong>' . $i . '</strong>'; // destacar la pàgina actual
+            echo '<strong>' . $i . '</strong>'; // destacar la pagina actual
         } else {
             echo '<a href="?pagina=' . $i . '">' . $i . '</a>';
         }
     }
     
-    // botó de pàgina següent
+    // Botó de pagina seguent
     if ($paginaActual < $totalPags) {
         echo '<a href="?pagina=' . ($paginaActual + 1) . '">Següent</a>';
     }
     echo "</div> <br>";
     
-    // div per als articles
     echo "<div class='articles-container'>";
-    
-    // mostrar els articles si n'hi ha
+    // mostrar els articles si existeixen
     if (count($articles) > 0) {
         foreach ($articles as $article) {
             echo "<div class='article-box'>";
@@ -79,16 +96,17 @@ try {
             
             // mostrar la imatge si existeix
             if (!empty($article['imatge'])) {
-                echo "<img src='" . htmlspecialchars($article['imatge']) . "' alt='Imatge' width='150'>";
+                echo "<img src='" . htmlspecialchars($article['imatge']) . "' width='150'>";
             } else {
+                // si no hi ha imatge
                 echo "<p>No hi ha imatge</p>";
             }
             echo "</div>";
         }
     } else {
-        echo "<p>No s'han trobat articles.</p>";
+        // si no hi ha articles
+        echo "<p>No s'han trobat vehicles.</p>";
     }
-    
     echo "</div>";
     
 } catch (PDOException $e) {
