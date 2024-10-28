@@ -19,6 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php if (isset($_SESSION['usuari'])):  ?> 
         <div class="navbar">
         <a href="Controlador/logout.php"><button>Deslogar-se</button></a>
+        <a href="Vistes/CanviarPassw.php"><button>Canviar password</button></a>
         </div>
 
         <!-- 3 botons que ens envien al document corresponent per tractar les dades -->

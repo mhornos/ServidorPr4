@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- formulari que demana les dades del vehicle per generar un article a la bd -->
-    <h3>Inserir vehicle a la BD</h3>
+    <h2>Inserir vehicle a la BD</h2><br>
 
     <form action="../Model/crud.php" method="post">
         <table>

@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- formulario per omplir l'id i modificar el titol i el cos -->
-    <h3>Modificar vechicle de la BD</h3>
+    <h2>Modificar vechicle de la BD</h2><br>
 
     <form action="../Model/crud.php" method="post">
         <table>

@@ -46,19 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pr4</title>
+    <title>Pr5</title>
 
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
 <body>
+    <br><h2>Inicia sessió:</h2>
     <br><form method="POST">
-        <label for="usuari">Nom d'usuari:</label>
-        <input type="text" name="usuari" value="<?php echo htmlspecialchars($usuari ?? ''); ?>">
-
-        <label for="contrasenya">Contrasenya:</label>
-        <input type="password" name="contrasenya" value="">
-
-        <input type="submit" value="Iniciar Sessió">
+        <input type="text" name="usuari" placeholder="Usuari" value="<?php echo htmlspecialchars($usuari ?? ''); ?>">
+        <input type="password" name="contrasenya" placeholder="Contrasenya" value="">
+        <input type="submit" name="Login" value="Login">
+        No tinc compte: <a href="Register.php"> Crea un compte </a>
     </form>
 
     <br><a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">

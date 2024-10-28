@@ -41,29 +41,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "has de repetir la contrasenya ❌";
     } elseif ($contrasenya !== $contrasenya2) {
         $errors[] = "les contrasenyes no coincideixen ❌";
+    } // comprovació de la validesa de la contrasenya
+    else{
+        // comprovem si la longitud de la contrasenya és inferior a 8 caràcters
+        if (strlen($contrasenya) < 8) {
+            $errors[] = "la contrasenya ha de tenir almenys 8 caràcters ❌";
+        }
+        
+        // comprovem si la contrasenya conté almenys un número
+        if (!preg_match('/[0-9]/', $contrasenya)) {
+            $errors[] = "la contrasenya ha de contenir almenys un número ❌";
+        }
+
+        // comprovem si la contrasenya conté almenys una lletra majúscula
+        if (!preg_match('/[A-Z]/', $contrasenya)) {
+            $errors[] = "la contrasenya ha de contenir almenys una lletra majúscula ❌";
+        }
+
+        // comprovem si la contrasenya conté almenys una lletra minúscula
+        if (!preg_match('/[a-z]/', $contrasenya)) {
+            $errors[] = "la contrasenya ha de contenir almenys una lletra minúscula ❌";
+        }
     }
 
-    // comprovació de la validesa de la contrasenya
-
-    // comprovem si la longitud de la contrasenya és inferior a 8 caràcters
-    if (strlen($contrasenya) < 8) {
-        $errors[] = "la contrasenya ha de tenir almenys 8 caràcters ❌";
-    }
     
-    // comprovem si la contrasenya conté almenys un número
-    if (!preg_match('/[0-9]/', $contrasenya)) {
-        $errors[] = "la contrasenya ha de contenir almenys un número ❌";
-    }
 
-    // comprovem si la contrasenya conté almenys una lletra majúscula
-    if (!preg_match('/[A-Z]/', $contrasenya)) {
-        $errors[] = "la contrasenya ha de contenir almenys una lletra majúscula ❌";
-    }
-
-    // comprovem si la contrasenya conté almenys una lletra minúscula
-    if (!preg_match('/[a-z]/', $contrasenya)) {
-        $errors[] = "la contrasenya ha de contenir almenys una lletra minúscula ❌";
-    }
+    
 
     // si no hi ha errors, creem l'usuari cridant la funció crearUsuari
     if (empty($errors)) {
@@ -88,23 +91,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="..\Estils\estils.css">
 </head>
 <body>
+    <br>
+    <h2>Crear compte de mecànic:</h2>      
     <br><form method="POST">
-        <label for="usuari">Nom d'usuari:</label>
-        <input type="text" name="usuari" value="<?php echo htmlspecialchars($usuari ?? ''); ?>">
-
-        <label for="correu">Correu:</label>
-        <input type="text" name="correu" value="<?php echo htmlspecialchars($correu ?? ''); ?>">
-
-        <label for="ciutat">Ciutat:</label>
-        <input type="text" name="ciutat" value="<?php echo htmlspecialchars($ciutat ?? ''); ?>">
-
-        <label for="contrasenya">Contrasenya:</label>
-        <input type="password" name="contrasenya" value="">
-
-        <label for="contrasenya2">Repeteix la contrasenya:</label>
-        <input type="password" name="contrasenya2" value="">
+        <input type="text" name="usuari" placeholder="Usuari" value="<?php echo htmlspecialchars($usuari ?? ''); ?>">
+        <input type="text" name="correu" placeholder="Correu" value="<?php echo htmlspecialchars($correu ?? '' ); ?>">
+        <input type="text" name="ciutat" placeholder="Ciutat" value="<?php echo htmlspecialchars($ciutat ?? ''); ?>">
+        <input type="password" name="contrasenya" placeholder="Contrasenya" value="">
+        <input type="password" name="contrasenya2" placeholder="Repeteix la contrasenya" value="">
+        <p>La contrasenya ha de tenir almenys 8 caràcters, un número, una majúscula i una minúscula.</p><br>
 
         <input type="submit" value="Registrar-se">
+        Ja tinc un compte: <a href="Login.php"> Iniciar sessió </a>
+
     </form>
 
     <br><a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">

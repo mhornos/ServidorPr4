@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="../Estils/estils.css">
 </head>
 <body>
-    <h3>Inicia sessió:</h3>
+    <h2>Inicia sessió:</h2><br>
     <form action="../Controlador/login.php" method="post">
-    <input type="text" id="usuari" name="usuari" placeholder="Usuari"> </br> 
-    <input type="password" id="contrasenya" name="contrasenya" placeholder="Contrasenya"> </br>
-    <input type="submit" name="Login" value="Login"></br>
-    No tinc compte: <a href="Register.php"> Crea un compte </a></br>
+    <input type="text" id="usuari" name="usuari" placeholder="Usuari"> 
+    <input type="password" id="contrasenya" name="contrasenya" placeholder="Contrasenya"> 
+    <input type="submit" name="Login" value="Login">
+    No tinc compte: <a href="Register.php"> Crea un compte </a>
     </form>
     <a href="../Index.php?pagina=<?php echo isset($_GET['pagina']) ? $_GET['pagina'] : 1; ?>">
             <button>Tornar a inici</button>

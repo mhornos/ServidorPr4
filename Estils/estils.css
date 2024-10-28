@@ -235,7 +235,6 @@ a button {
     top: 20px; /* Distància des de la part superior */
     left: 20px; /* Distància des de la part esquerra */
     background-color: #fff; /* Color de fons blanc */
-    border: 1px solid #ccc; /* Borde gris clar */
     border-radius: 8px; /* Bordes arrodonits */
     padding: 15px; /* Espai intern */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Ombra suau */

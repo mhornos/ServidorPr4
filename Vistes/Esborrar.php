@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- formulari per escollir l'id per borrar article de la bd -->
-    <h3>Eliminar vehicle de la BD</h3>
+    <h2>Eliminar vehicle de la BD</h2><br>
 
     <form action="../Model/crud.php" method="post">
         <table>
